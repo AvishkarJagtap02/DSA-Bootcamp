@@ -5,5 +5,5 @@ void main() {
 	char *fName2 = "NeymarJr";
 	char *fName3 = "Messi";
 
-	printf("%p\n%p\n",fName1,fName3);
+	printf("%p%p","fName1,fName3");
 }
