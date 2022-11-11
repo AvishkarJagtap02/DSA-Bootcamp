@@ -1,6 +1,6 @@
 #include<stdio.h>
 void main() {
-	int rows;
+	int rows,x=1;
 	printf("Enter rows\n");
 	scanf("%d",&rows);
 
@@ -9,7 +9,8 @@ void main() {
 			printf("\t");
 		}
 		for(int k=i;k>=1;k--) {
-			printf("*\t");
+			printf("%d\t",x);
+			x++;
 		}
 		printf("\n");
 	}
