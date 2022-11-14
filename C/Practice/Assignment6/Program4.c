@@ -3,16 +3,16 @@ void main() {
 	int rows;
 	printf("Enter rows\n");
 	scanf("%d",&rows);
-	
-	char ch=96+rows;
-	for(int i=rows;i>=1;i--) {
-		for(int j=i;j<4;j++) {
+
+	char x=96+rows;
+	for(int i=1;i<=rows;i++) {
+		for(int j=1;j<i;j++) {
 			printf("\t");
 		}
-		for(int k=i;k>=1;k--) {
-			printf("%c\t",ch);
+		for(int k=i;k<=rows;k++) {
+			printf("%c\t",x);
 		}
 		printf("\n");
-		ch--;
+		x--;
 	}
 }
