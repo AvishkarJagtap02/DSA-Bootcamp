@@ -42,11 +42,3 @@ void main() {
 	printf("%f\n",obj2.next->avg);
 
 }
-
-
-
-	
-
-
-
-
