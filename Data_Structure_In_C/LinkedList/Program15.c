@@ -44,21 +44,25 @@ int countNodes() {
 	return count;
 }
 void addAtPos(int pos) {
-	struct Demo* newnode = createNode();
-	struct Demo* temp = head;
 	int count = countNodes();
-	if(pos>0 && pos<=count+1) {
-		while(pos-2) {
-			temp = temp->next;
-			pos--;
-		}
-		newnode->next = temp->next;
-		temp->next = newnode;
-	}else {
+       	if(pos<=0 || pos>=count+2) {
 		printf("Invalid Position\n");
 	}
+	else if(pos == count+1) {
+		addNode();
+	}else if(pos == 1) {
+		addFirst();
+	}else {
+		struct Demo* newnode = createNode();
+		struct Demo* temp = head;
+		while(pos-2) {
+			temp=temp->next;
+			pos--;
+		}
+		newnode->next=temp->next;
+		temp->next=newnode;
+	}
 }
-
 void printLL() {
 	struct Demo* temp = head;
 	while(temp!=NULL) {
@@ -79,8 +83,29 @@ void deleteLast() {
 	free(temp->next);
 	temp->next = NULL;
 }
-
-
+int deleteAtPos(int pos) {
+	int count = countNodes();
+	if(pos<=0 || pos>count) {
+		printf("Invalid Position\n");
+		return -1;
+	}else if(pos == count) {
+		deleteLast();
+	}else if(pos == 1) {
+		deleteFirst();
+	}else {
+		struct Demo* newnode = createNode();
+		struct Demo *temp1 = head;
+		struct Demo *temp2 = head;
+		while(pos-2) {
+			temp1 = temp1->next;
+			temp2 = temp2->next;
+			pos--;
+		}
+		temp1=temp1->next;
+		temp2=temp2->next->next;
+		free(temp1->next);
+	}
+}
 void main() {
 	char ch;
 	do{
@@ -90,6 +115,7 @@ void main() {
 		printf("4 : printLL\n");
 		printf("5 : deleteFirst\n");
 		printf("6 : deleteLast\n");
+		printf("7 : deleteAtPos\n");
 		int choice;
 		printf("Enter Choice\n");
 		scanf("%d",&choice);
@@ -118,8 +144,13 @@ void main() {
 				deleteLast();
 				break;
 			case 7:
-				countNodes();
+			{	
+				int pos=0;
+				printf("Enter Position of node you want to delete\n");
+				scanf("%d",&pos);	
+				deleteAtPos(pos);
 				break;
+			}
 			default:
 				printf("Wrong choice\n");
 		}
