@@ -1,0 +1,125 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Demo {
+	int data;
+	struct Demo* next;
+}Demo;
+Demo* head = NULL;
+Demo* createNode() {
+	Demo* newnode = (Demo*)malloc(sizeof(Demo));
+	printf("Enter Data\n");
+	scanf("%d",&newnode->data);
+	newnode->next=NULL;
+	return newnode;
+}
+void addNode() {
+	Demo* newnode = createNode();
+	if(head == NULL) {
+		head= newnode;
+	}else {
+		Demo* temp = head;
+		while(temp->next!=NULL) {
+			temp = temp-> next;
+		}
+		temp -> next = newnode;
+	}
+}
+int FirstOccurrence(int target) {
+	printf("Enter Target\n");
+	scanf("%d",&target);
+	int count1 = 1,count2 = 0;
+	Demo* temp = head;
+	while(temp!=NULL) {
+		if(temp->data == target) {
+			count2=count1;
+			printf("First Occurrence : %d\n",count2);
+			break;	
+		}
+		temp=temp->next;
+		count1++;
+	}
+	printf("Element Not Exists\n");
+}
+void secondLastOccurrence() {
+	int target;
+	printf("Enter target\n");
+	scanf("%d",&target);
+	Demo* temp1 = head;
+	Demo* temp2 = head;
+	Demo* index1 = head;
+	Demo* index2 = head;
+	int count=0;
+	while(temp1!=NULL) {
+		if(temp1->data==target) {
+			index1=temp1;
+			count++;
+		}	
+		temp1=temp1->next;
+	}
+	if(count==0) {
+			printf("Element not Exist\n");
+	}else if(count==1) {
+			printf("Element occurs only once\n");
+	}else {
+		int count1 = 1,count2=1;
+		while(temp2!=index1) {
+			if(temp2->data == target) {
+				index2  = temp2;
+				count2 = count1;
+			}	
+			temp2 = temp2->next;
+			count1++;
+		}
+		printf("Second Last Occurrence is : %d",count2);
+	}	
+}
+int addData(int n) {
+	int temp = n;
+	int rem = 0;
+	int sum=0;
+	while(n!=0) {
+		rem = n % 10;
+		sum = sum+rem;
+		n=n/10;
+	}
+	return sum;
+}
+int addDataElements() {
+	Demo* temp = head;
+	while(temp->next!=NULL) {
+		temp->data = addData(temp->data);
+		printf("|%d|->",addData(temp->data));
+		temp=temp->next;
+	}	
+	printf("|%d|",addData(temp->data));
+	printf("\n");
+
+}
+void occurrence() {
+	int target;
+	printf("Enter a number to check its occurrence\n");
+	scanf("%d",&target);
+	Demo* temp = head;
+	int count = 0;
+	while(temp!=NULL) {
+		if(temp->data == target) {
+			count++;
+		}
+		temp = temp -> next;
+	}
+	printf("%d times\n",count);
+}
+void main() {
+	 int n;
+	 printf("Enter Number of Nodes you want\n");
+	 scanf("%d",&n);
+	 for(int i=1;i<=n;i++) {
+		addNode();
+	 }
+	 int target;
+	 FirstOccurrence(target);
+	 printf("For Second Last Occurrence\n");
+	 secondLastOccurrence();
+	 occurrence();
+	 addDataElements();
+}

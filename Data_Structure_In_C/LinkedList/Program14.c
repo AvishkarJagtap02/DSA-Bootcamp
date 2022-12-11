@@ -1,23 +1,37 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct Demo {
-	int data;
-	struct Demo *next;
-};
-struct Demo* head = NULL;
-struct Demo* createNode() {
-	struct Demo* newnode = (struct Demo*)malloc(sizeof(struct Demo));
-        printf("Enter Node\n");
-        scanf("%d",&newnode->data);
+typedef struct Recession {
+	char company_Name[20];
+	int no_of_emp_Fired;
+	float rev;
+	struct Recession *next;
+}Demo;
+Demo* head = NULL;
+Demo* createNode() {
+	Demo* newnode = (Demo*)malloc(sizeof(Demo));
+        printf("Enter Company Name\n");
+        int i=0;
+	char ch = ' ';
+	while((ch = getchar())!='\n') {
+		newnode->company_Name[i] = ch;
+		i++;
+	}
+	printf("Enter Number of employees Fired :  ");
+	scanf("%d",&newnode->no_of_emp_Fired);
+	
+	printf("Enter Revenue of the company :  ");
+	scanf("%f",&newnode->rev);
+
+
   	newnode->next = NULL;
 	return newnode;
 }	
 void addNode() {
-	struct Demo *newnode = createNode();
+	Demo *newnode = createNode();
 	if(head==NULL) {
 		head = newnode;
 	}else {
-		struct Demo *temp = head;
+		Demo *temp = head;
 		while(temp->next!=NULL) {
 			temp = temp->next;
 		}
@@ -25,7 +39,7 @@ void addNode() {
 	}
 }
 void addFirst() {
-	struct Demo* newnode = createNode();
+	Demo* newnode = createNode();
 	if(head==NULL) {
 		head = newnode;
 	}else {
@@ -34,98 +48,149 @@ void addFirst() {
 	}
 }
 int countNodes() {
-	struct Demo* temp = head;
+	Demo* temp = head;
 	int count = 0 ;
 	while(temp!=NULL) {
 		temp=temp->next;
 		count++;
 	}
-	printf("\nCount of Nodes = %d\n",count);
 	return count;
 }
-void addAtPos(int pos) {
-	struct Demo* newnode = createNode();
-	struct Demo* temp = head;
-	int count = countNodes();
-	if(pos>0 && pos<=count+1) {
+void addAtPos() {
+	int pos =0;
+	while(pos<=0) {
+		printf("Enter position for Insertion : ");
+		scanf("%d",&pos);
+		getchar();
+		if(pos<=0 || pos>countNodes() + 1 ){
+			printf("Invalid Position Entered!!  Please Enter Valid Position \n");
+			pos=0;
+		}
+	}
+	if(pos == 1) {
+		addFirst();
+	}else if(pos == countNodes()) {
+		addNode();
+	}else {
+		Demo* temp = head;
 		while(pos-2) {
 			temp = temp->next;
 			pos--;
 		}
+		Demo* newnode = createNode();
 		newnode->next = temp->next;
 		temp->next = newnode;
-	}else {
-		printf("Invalid Position\n");
 	}
 }
 
 void printLL() {
-	struct Demo* temp = head;
-	while(temp!=NULL) {
-		printf("|%d| ",temp->data);
+	if(head == NULL) {
+		printf("LinkedList is Empty\n");
+		return;
+	}
+	Demo* temp = head;
+	while(temp->next!=NULL) {
+		printf("[ %s | %d | %f ]->",temp->company_Name,temp->no_of_emp_Fired,temp->rev);
 		temp=temp->next;
 	}
+		printf("[ %s | %d | %f ]\n",temp->company_Name,temp->no_of_emp_Fired,temp->rev);
 }
 void deleteFirst() {
-	struct Demo *temp = head;
+	Demo *temp = head;
 	head = temp->next;
 	free(temp);
 }
 void deleteLast() {
-	struct Demo *temp = head;
+	Demo *temp = head;
+	if(head == NULL) {
+		return;
+	}else if(head->next == NULL) {
+		free(head);
+		head=NULL;
+		return;
+	}
 	while(temp->next->next!=NULL) {
 		temp = temp->next;
 	}
 	free(temp->next);
 	temp->next = NULL;
 }
-
+void deleteAtPos() {
+	int pos = 0;
+	while(pos<=0) {
+		printf("Enter Position to delete Node : ");
+		scanf("%d",&pos);
+		getchar();
+		if(pos>countNodes() || pos<=0) {
+			printf("Please Enter Valid Position \n");
+			pos = 0;
+		}
+	}
+	if(pos == 1){
+		deleteFirst();
+	}else if(pos == countNodes()) {
+		deleteLast();
+	}else {
+		Demo* temp = head;
+		while(pos-2) {
+			pos--;
+			temp = temp->next;
+		}
+		Demo* temp2 = temp->next;
+		temp -> next = temp->next->next;
+		free(temp2);
+	}
+}
 
 void main() {
 	char ch;
-	do{
-		printf("1 : addNode\n");
-		printf("2 : addfirst\n");
+	int exit = 1;
+	while(exit) {
+		printf("1 : addFirst\n");
+		printf("2 : addLast\n");
 		printf("3 : adaAtPos\n");
-		printf("4 : printLL\n");
-		printf("5 : deleteFirst\n");
-		printf("6 : deleteLast\n");
+		printf("4 : deleteFirst\n");
+		printf("5 : deleteLast\n");
+		printf("6 : deleteAtPos\n");
+		printf("7 : printLL\n");
+		printf("8 : countLL\n");
+		printf("9 : exit\n");
 		int choice;
 		printf("Enter Choice\n");
 		scanf("%d",&choice);
+		getchar();
 		switch(choice) {
 			case 1:
-				addNode();
-				break;
-			case 2:
 				addFirst();
 				break;
-			case 3:
-			{
-				int pos=0;
-				printf("Enter Position\n");
-				scanf("%d",&pos);
-				addAtPos(pos);
-			}
-			break;
-			case 4:
-				printLL();
+			case 2:
+				addNode();
 				break;
-			case 5:
+			case 3:
+				addAtPos();
+				break;
+			case 4:
 				deleteFirst();
 				break;
-			case 6:
+			case 5:
 				deleteLast();
 				break;
+			case 6:
+				deleteAtPos();
+				break;
 			case 7:
-				countNodes();
+				printLL();
+				break;
+			case 8:
+				printf("count : %d\n\n",countNodes());
+				break;
+			case 9:
+				exit = 0;
 				break;
 			default:
 				printf("Wrong choice\n");
+				break;
 		}
-		getchar();
-		printf("Do you want to continue\n");
-		scanf("%c",&ch);
-	}while(ch == 'y' || ch == 'Y');
+	}
 
 }
