@@ -2,19 +2,18 @@
 #include<stdlib.h>
 #include<string.h>
 typedef struct Demo {
+	struct Demo* prev;
 	char name[20];
 	struct Demo* next;
 }Demo;
 Demo* head = NULL;
 Demo* createNode() {
 	Demo* newnode = (Demo*)malloc(sizeof(Demo));
-	//getchar();
 	printf("Enter Data\n");
 	getchar();
-	//fgets(newnode->name,15,stdin);
 	scanf("%[^\n]",newnode->name);
-	//getchar();
 	newnode->next=NULL;
+	newnode->prev = NULL;
 	return newnode;
 }
 int addNode() {
@@ -27,6 +26,8 @@ int addNode() {
 			temp = temp-> next;
 		}
 		temp -> next = newnode;
+		newnode->next = NULL;
+		newnode->prev = temp;
 	}
 	return 0;
 }
@@ -49,15 +50,22 @@ int countNodes() {
 }
 void deleteFirst() {
 	Demo* temp = head;
-	head = temp->next; 
-	free(temp);
+	if(head == NULL) {
+		printf("List is Empty\n");
+	}else {
+		head =head->next; 
+		free(head->prev);
+		head->prev = NULL;
+	}
 }
 void deleteLast() {
-	if(countNodes() == 1) {
+	if(head == NULL) {
+		printf("List is Empty\n");
+	}else if(countNodes() == 1){
 		deleteFirst();
 	}else {
 		Demo* temp = head;
-		while(temp->next->next!=NULL) {
+		while(temp->next->next!=NULL) { 
 			temp = temp->next;
 		}
 		free(temp->next);
@@ -66,8 +74,7 @@ void deleteLast() {
 }
 	
 void deleteAtpos(int pos) {
-	Demo* temp1 = head;
-	Demo* temp2 = head;
+	Demo* temp = head;
 	if(head==NULL) {
 		printf("List is empty\n");
 	}else if(pos == 1) {
@@ -77,13 +84,12 @@ void deleteAtpos(int pos) {
 	}
 	else {
 		while(pos-2) {
-			temp1=temp1->next;
-			temp2=temp2->next;
+			temp=temp->next;
 			pos--;
 		}
-		temp2 = temp1->next;
-		temp1->next = temp1->next->next;
-		free(temp2->next);
+		temp->next = temp->next->next;
+		free(temp->next->prev);
+		temp->next->prev = temp;
 	}
 }
 void printLL() {
@@ -92,29 +98,26 @@ void printLL() {
 		printf("|%s|->",temp->name);
 		temp=temp->next;
 	}
-	printf("|%s|\n",temp->name);
+	printf("|%s|",temp->name);
 }
 
 void sameLengthString() {
-	int len,cnt=1;
-	 printf("Enter length\n");
-	 scanf("%d",&len);
-	 Demo* temp = head;
-	while(temp != NULL) {
-		int count = mystrlen(temp->name);
-		if(count == len) {
-			puts(temp->name);
-			cnt++;
-		}
-		else {
-			deleteAtpos(cnt);
-			cnt--;
-			//printf("Node deleted sucessfully\n");
-		}
-		temp=temp->next;
-	}
-}
+	int pos=1;
+	Demo *temp = head;
+	int length;
+	printf("Enter length\n");
+	scanf("%d",&length);
 
+	while(temp!=NULL) {
+		if(length != mystrlen(temp->name)) {
+			deleteAtpos(pos);
+			pos--;
+		}
+		pos++;
+		temp = temp -> next;
+	}
+	printLL();
+}
 void main() {
 	 int n,num=0;
 	 printf("Enter Number of Nodes you want\n");
@@ -123,6 +126,5 @@ void main() {
 		addNode();
 	 }
 	 sameLengthString();
-	 //printLL();
-	 printf("The End\n");
+	 printLL();
 }

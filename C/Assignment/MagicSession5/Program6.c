@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct Demo {
+	struct Demo* prev;
 	int data;
 	struct Demo* next;
 }Demo;
@@ -10,6 +11,7 @@ Demo* createNode() {
 	printf("Enter Data\n");
 	scanf("%d",&newnode->data);
 	newnode->next=NULL;
+	newnode->prev=NULL;
 
 	return newnode;
 }
@@ -23,6 +25,8 @@ void addNode() {
 			temp = temp-> next;
 		}
 		temp -> next = newnode;
+		newnode -> next = NULL;
+		newnode->prev = temp;
 	}
 }
 void FirstOccurrence() {
