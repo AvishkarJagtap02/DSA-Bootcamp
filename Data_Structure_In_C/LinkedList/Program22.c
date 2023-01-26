@@ -29,7 +29,7 @@ void addFirst() {
 	struct Demo* newnode = createNode();
 	if(head == NULL) {
 		head = newnode;
-		newnode->next = head;
+		newnode->next = head;					//10->20->30->40->50
 		newnode->prev = head;
 	}else {
 		newnode->next = head;

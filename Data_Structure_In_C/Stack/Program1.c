@@ -1,3 +1,4 @@
+//Inserting elements in stack
 #include<stdio.h>
 int top = -1;
 int arr[5];

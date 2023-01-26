@@ -1,68 +1,47 @@
-//implimenting stack using LinkedList
+//realtime example of stack using array
 #include<stdio.h>
 #include<stdlib.h>
-typedef struct Node {
-	int data;
-	struct Node* next;
-}node;
-node* head = NULL;
 int top = -1;
-int size;
-node* createNode() {
-	node* newnode = (node*)malloc(sizeof(node));
-	printf("Enter Data\n");
-	scanf("%d",&newnode->data);
-	newnode -> next = NULL;
-	return newnode;
-}
-int push() {
+int size = 0;
+typedef struct FootballPlayer {
+	int pName;
+	float salary;
+}player;
+int push(int stack[]) {
 	if(top == size - 1) {
 		printf("Stack Overflow\n");
 		return -1;
 	}else {
-		node* newnode = createNode();
-		if(head == NULL) {
-			head  = newnode;
-		}else {
-			newnode->next = head;
-			head = newnode;
-		}
+		createStruct();
 		top++;
+		stack[top] = data;
 		return 0;
 	}
 }
-int pop() {
-	int ret;
+int pop(int *stack) {
 	if(top == -1) {
 		printf("Stack UnderFlow\n");
 		return -1;
 	}else {
-		if(head==NULL) {
-			free(head);
-			head = NULL;
-		}else {
-			node* temp = head;
-			head = head->next;
-			ret = temp->data;
-			free(temp);
-		}
+		int data = *(stack+top);
 		top--;
-		return ret;
+		return data;
 	}
 }
-int peek() {
+int peek(int stack[]) {
 	if(top == -1) {
 		printf("Stack is Empty\n");
 		return -1;
 	}else {
-		printf("%d\n",head->data);
-		return head->data;
+		printf("%d\n",stack[top]);
+		return stack[top];
 	}
 }
 void main() {
+	player p1,p2,p3;
 	printf("Enter Size of stack\n");
 	scanf("%d",&size);
-	
+	int stack[size];
 	char ch;
 	do {
 		printf("1.Push\n");
@@ -73,7 +52,7 @@ void main() {
 		scanf("%d",&choice);
 		switch(choice) {
 			case 1:
-				push();
+				push(stack);
 				break;
 			case 2:
 				{
@@ -81,11 +60,11 @@ void main() {
 					printf("stack is empty\n");
 					break;
 				}
-				printf("%d popped\n",pop());
+				printf("%d popped\n",pop(stack));
 				}
 				break;
 			case 3:
-				peek();
+				peek(stack);
 				break;
 			default:
 				printf("INVALID CHOICE\n");
