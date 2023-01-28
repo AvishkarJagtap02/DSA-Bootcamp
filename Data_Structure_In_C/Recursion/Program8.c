@@ -1,7 +1,7 @@
-//o/p: 5 times Hello and 4 time bye
+//o/p: 
 #include<stdio.h>
 int x = 5;
-void fun() {
+void fun(int x) {
 	printf("Hello\n");
 	if(x!=1) {
 		fun(--x);
@@ -9,5 +9,5 @@ void fun() {
 	}
 }
 void main() {	
-	fun();
+	fun(x);
 }	
