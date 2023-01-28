@@ -1,3 +1,4 @@
+//concat 2 LinkedList
 #include<stdio.h>
 #include<stdlib.h>
 struct Node {

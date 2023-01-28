@@ -1,3 +1,4 @@
+//concat 2 linked list / concat n elements from other linkedlist
 #include<stdio.h>
 #include<stdlib.h>
 struct Node {
@@ -35,13 +36,6 @@ void printSLL(struct Node* head) {
 	printf("|%d|->",temp->data);
 	
 }
-/*void concatLL() {
-	struct Node* temp = head1;
-	while(temp->next != NULL) {
-		temp = temp->next;
-	}
-	temp->next = head2;
-}*/
 int countNodes(struct Node* head) {
 	int count = 0;
 	struct Node* temp = head;
@@ -82,7 +76,6 @@ void main() {
 		addNode(&head2);
 	}
 	printSLL(head1);
-	//concatLL();
 	int num;
 	printf("\nEnter Number of nodes you want to concat\n");
 	printSLL(head2);
