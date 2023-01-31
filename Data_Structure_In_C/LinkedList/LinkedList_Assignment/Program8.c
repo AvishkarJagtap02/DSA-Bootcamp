@@ -1,4 +1,4 @@
-//program to concat first n contents of LinkedList 1 to LinkedList2
+//program to concat last n contents of LinkedList 1 to LinkedList2
 #include<stdio.h>
 #include<stdlib.h>
 struct Demo {
@@ -72,24 +72,26 @@ struct Demo* create_Node(int val) {
 	newnode->next = NULL;
 	return newnode;
 }
-struct Demo* copyNLL(int num) {
+struct Demo* copyNLL(int num) {										//1->2->3->4->5
+													//3
+													//3->4->5
 	struct Demo* temp1 = head1;
 	struct Demo* temp2 = head2;
+	num = countNodes() - num;
 	while(num) {
-
-		printf("created....\n");
-
-    		struct Demo* newnode = create_Node(temp1->data);		
-		if(head2==NULL) {
+		temp1 = temp1->next;
+		num--;
+	}
+	while(temp1!=NULL) {
+		struct Demo* newnode = create_Node(temp1->data);
+		if(head2 == NULL) {
 			head2 = newnode;
+			temp2 = head2;
 			temp1=temp1->next;
-			temp2 = head2;			
-			num--;
-		}else { 
-		    	temp2->next = newnode;
-		    	temp2 = temp2->next;
-			temp1 = temp1->next;
-		    	num--;
+		}else {
+			temp2->next = newnode;
+			temp2=temp2->next;
+			temp1=temp1->next;
 		}
 	}
 		printf("\n\n====================================================\n");
@@ -106,7 +108,7 @@ void copyLL() {
 	struct Demo* temp1 = head1;
 	printf("\nEnter Number of nodes to copy\n");
 	scanf("%d",&num);
-	if(num>=countNodes(head1)) {
+	if(num>=countNodes()) {
 
 		printf("copy all nodes..\n");
 
@@ -136,7 +138,7 @@ void main() {
 		printf("1. Add Data In List1\n");
 		printf("2. print List1\n");
 		printf("3. print List2\n");
-		printf("4. concat Lists\n");
+		printf("4. copy Lists\n");
 		printf("5. exit\n");
 		printf("\n\nSelect Option\n");
 		scanf("%d",&n);

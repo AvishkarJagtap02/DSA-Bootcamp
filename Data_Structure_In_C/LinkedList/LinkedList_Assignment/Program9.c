@@ -1,4 +1,4 @@
-//program to concat first n contents of LinkedList 1 to LinkedList2
+//program to concat n contents in range of LinkedList 1 to LinkedList2
 #include<stdio.h>
 #include<stdlib.h>
 struct Demo {
@@ -64,32 +64,37 @@ struct Demo* copyAllLL(struct Demo* head1) {
         return newnode;
     }
 }																				
-										
-
 struct Demo* create_Node(int val) {
 	struct Demo* newnode = (struct Demo*)malloc(sizeof(struct Demo));
 	newnode->data = val;
 	newnode->next = NULL;
 	return newnode;
 }
-struct Demo* copyNLL(int num) {
+struct Demo* copyNLL(int start,int end) {								//1->2->3->4->5->6->7
+													//2-5
+													//2->3->4->5
 	struct Demo* temp1 = head1;
+	struct Demo* temp = head1;
 	struct Demo* temp2 = head2;
-	while(num) {
-
-		printf("created....\n");
-
-    		struct Demo* newnode = create_Node(temp1->data);		
-		if(head2==NULL) {
+	
+	while(start-1) {
+		temp1 = temp1->next;
+		start--;
+	}
+	while(end-1) {
+		temp = temp->next;
+		end--;
+	}
+	while(temp1!=temp->next) {
+		struct Demo* newnode = create_Node(temp1->data);
+		if(head2 == NULL) {
 			head2 = newnode;
+			temp2 = head2;
 			temp1=temp1->next;
-			temp2 = head2;			
-			num--;
-		}else { 
-		    	temp2->next = newnode;
-		    	temp2 = temp2->next;
-			temp1 = temp1->next;
-		    	num--;
+		}else {
+			temp2->next = newnode;
+			temp2=temp2->next;
+			temp1=temp1->next;
 		}
 	}
 		printf("\n\n====================================================\n");
@@ -102,13 +107,13 @@ struct Demo* copyNLL(int num) {
 
 }
 void copyLL() {
-	int num;
+	int start,end;
 	struct Demo* temp1 = head1;
-	printf("\nEnter Number of nodes to copy\n");
-	scanf("%d",&num);
-	if(num>=countNodes(head1)) {
-
-		printf("copy all nodes..\n");
+	printf("\nEnter Number starting range of nodes to copy\n");
+	scanf("%d",&start);
+	printf("\nEnter Number Ending range of nodes to copy\n");
+	scanf("%d",&end);
+	if(start == 1 && end>=countNodes()) {
 
 		head2 = copyAllLL(head1);			
 		printf("\n\n====================================================\n");
@@ -119,7 +124,7 @@ void copyLL() {
 		printLL(head2);
 		printf("====================================================\n\n");
 	}else {
-		copyNLL(num);
+		copyNLL(start,end);
 		printf("\n\n====================================================\n");
 		printf("Source List: \n");
 		printLL(head1);
@@ -136,7 +141,7 @@ void main() {
 		printf("1. Add Data In List1\n");
 		printf("2. print List1\n");
 		printf("3. print List2\n");
-		printf("4. concat Lists\n");
+		printf("4. copy Lists\n");
 		printf("5. exit\n");
 		printf("\n\nSelect Option\n");
 		scanf("%d",&n);
