@@ -1,0 +1,38 @@
+//Finding elements using BinarySearch 
+#include<stdio.h>
+#include<stdlib.h>
+int BinarySearch(int arr[] , int size, int key) {
+	int start = 0,end = size-1;
+
+	while(start<=end) {
+		int mid = (start+end)/2;
+		if(arr[mid] == key) {
+			return mid;
+		}if(arr[mid] < key) {
+			start = mid+1;
+		}if(arr[mid]>key) {
+			end = mid - 1;
+		}
+	}return -1;
+}
+void main() {
+	int size,key;
+	printf("Enter Size\n");
+	scanf("%d",&size);
+	int arr[size]; 
+	printf("Enter Array Elements\n");
+	for(int i=0;i<size;i++) {
+		scanf("%d",&arr[i]);
+	}
+	printf("Enter Key\n");
+	scanf("%d",&key);
+	int p = BinarySearch(arr,size,key);
+	if(p==-1) {
+		printf("Element not exits in the array!!!\n");
+		exit(0);
+	}
+	printf("%d is present in the array at index : %d\n",key,p);
+}
+
+
+
