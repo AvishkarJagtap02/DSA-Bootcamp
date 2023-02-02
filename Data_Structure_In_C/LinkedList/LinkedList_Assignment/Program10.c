@@ -68,15 +68,16 @@ struct Demo* copyNode(int n) {										//11->12->13->14->15->16->17
 		temp2 = head2;
 		newnode -> next = NULL;
 	}else {
-		temp2->next = newnode;
-		temp2=temp2->next;
+		temp2->next =  newnode;
+		temp2 = temp2->next;
 		newnode->next = NULL;
 	}
 }
 bool checkEven(int n) {
-	int sum = 0,temp = n;
+	int sum = 0,temp = n,rem=0;
 	while(n!=0) {
-		sum = sum + n%10;
+		rem = n%10;
+		sum = sum + rem;
 		n=n/10;
 	}if(sum %2 == 0) {
 		return true;
@@ -84,13 +85,14 @@ bool checkEven(int n) {
 		return false;
 	}
 }
-void copyEvenLL() {
-	struct Demo* temp1 = head1;
+void copyEvenLL() {									// 0  1   2   3   4   5   6
+	struct Demo* temp1 = head1;							//10->11->12->13->14->15->16
 		while(temp1!=NULL) {
 			if(checkEven(temp1->data)) {
 					copyNode(temp1->data);
 					temp1=temp1->next;
 			}else {
+				printf("skipping ");
 				temp1=temp1->next;
 			}
 		}			
