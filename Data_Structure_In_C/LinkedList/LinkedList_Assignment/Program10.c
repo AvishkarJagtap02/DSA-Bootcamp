@@ -92,7 +92,6 @@ void copyEvenLL() {									// 0  1   2   3   4   5   6
 					copyNode(temp1->data);
 					temp1=temp1->next;
 			}else {
-				printf("skipping ");
 				temp1=temp1->next;
 			}
 		}			

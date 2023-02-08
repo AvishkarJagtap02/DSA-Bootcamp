@@ -14,7 +14,6 @@ int floor_Number(int arr[] , int size, int key) {
 		}if(arr[i]>key) {
 			return arr[i-1];
 		}
-		
 	}return -1;
 }
 void main() {

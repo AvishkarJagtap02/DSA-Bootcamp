@@ -1,11 +1,8 @@
-//Finding floor  using BinarySearch    key = 12
-// 0   1   2   3   4   5    6    7    8
-//{2 , 4 , 6 , 7 , 8 , 10 , 11 , 13 , 15}
+//Finding floor  using BinarySearch   
 #include<stdio.h>
 #include<stdlib.h>
-int Floor_BinarySearch(int arr[] , int size, int key) {
+int Ceiling_BinarySearch(int arr[] , int size, int key) {
 	int start = 0,end = size-1,store = -1;
-
 	while(start<=end) {
 		int mid = (start+end)/2;
 		if(arr[mid] == key) {
@@ -29,12 +26,12 @@ void main() {
 	}
 	printf("Enter Key\n");
 	scanf("%d",&key);
-	int p = Floor_BinarySearch(arr,size,key);
+	int p = Ceiling_BinarySearch(arr,size,key);
 	if(p==-1) {
 		printf("Floor not Found!!!\n");
 		exit(0);
 	}
-	printf("floor : %d\n",p);
+	printf("Floor : %d\n",p);
 }
 
 
