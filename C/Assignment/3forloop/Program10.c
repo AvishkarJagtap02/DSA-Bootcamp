@@ -7,7 +7,7 @@ void main() {
 
 	int p=1;
 	for(int i=a;i<=b;i++) {
-		float c = (flioat)p/i;
+		float c = (float)p/i;
 		printf("%d = %.2f\n",i,c);
 	}
 }
