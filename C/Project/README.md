@@ -10,9 +10,9 @@ fundamentals of c programming and logic building with interactive GUI.</h4>
 
 <hr>
 <h3>Technologies used</h3>
-<ul>
+<ol>
 <li>C language</li>
 <li>GTK</li>
 <li>Glade</li>
 <li>Gitlab</li>
-</ul>
+</ol>
