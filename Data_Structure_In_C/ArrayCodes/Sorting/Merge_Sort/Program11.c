@@ -1,7 +1,9 @@
-// 0  1  2   3   4  5   6  7  8  9
+ //  0  1  2   3   4  5   6  7  8  9
 // 7, 1, 4, -5, -3, 10, 8, 9, 3, 2
-// find kth smallest element
+// s             m               e
+//merge Sort
 #include<stdio.h>
+
 void merge(int arr[],int start,int mid,int end) {
 	int ele1 = mid-start+1;
 	int ele2 = end - mid;
@@ -42,39 +44,19 @@ void mergeSort(int arr[],int start,int end) {
 		merge(arr,start,mid,end);
 	}
 }
-int kth_smallest_element(int arr[],int size,int k) {
-
-	int start = 0,end = size-1;
-	mergeSort(arr,start,end);
-	printf("\n=======================================\n");
-	printf("Array After Sort\n");
-	for(int i=0;i<size;i++) {
-		printf("%d ",arr[i]);
-	}
-	printf("\n=======================================\n");
-	if(k>size-1 || k<0) {
-		return -1;
-	}
-	return arr[k-1];
-}
 void main() {
 	int arr[] = {7,1,4,-5,-3,10,8,9,3,2};
 	int size = sizeof(arr)/sizeof(arr[0]);
-	int k=0;
-	printf("Enter K\n");
-	scanf("%d",&k);
-	printf("\n=======================================\n");
+	int start=0,end=size-1;
 	printf("Array Before Sort\n");
 	for(int i=0;i<size;i++) {
 		printf("%d ",arr[i]);
 	}
 	printf("\n=======================================\n");
-	int x = kth_smallest_element(arr,size,k);
-	if(x == -1) {
-		printf("Element Not Found!!!");
-	}else {
-		printf("Kth smallest Element is: \n");
-		printf("%d ",x);
+	mergeSort(arr,start,end);
+	printf("Array After Sort\n");
+	for(int i=0;i<size;i++) {
+		printf("%d ",arr[i]);
 	}
 	printf("\n=======================================\n");
 }
