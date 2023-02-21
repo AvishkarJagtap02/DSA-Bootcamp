@@ -1,5 +1,5 @@
 // { 15, 10, 18, 5 } 
-// { 10, 18, 5, 15 }
+// { 10, 18, 15, 5 }
 #include<stdio.h>
 void swap(int *a,int *b) {
 	int temp = *a;
