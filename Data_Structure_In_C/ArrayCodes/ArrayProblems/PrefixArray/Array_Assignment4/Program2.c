@@ -1,4 +1,4 @@
-//printing count pof numbers which have numbers greter than itself in array
+//printing count of numbers which have numbers greter than itself in array
 #include<stdio.h>
 void main() {
 	int size = 8;
