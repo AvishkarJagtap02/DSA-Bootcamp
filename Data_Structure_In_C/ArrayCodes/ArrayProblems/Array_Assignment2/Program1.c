@@ -2,31 +2,6 @@
 //[1 2 3]
 //[4 5 6]
 //[7 8 9]
-/*
-[12, 13, 18]
-#include<stdio.h>
-int *col_wise_Addition(int[][3] arr,int rows,int cols) {
-	int arr1[] = malloc(cols*sizeof(int));
-	for(int j=0;j<cols;j++) {
-		int sum = 0;
-		for(int j=0;i<cols;j++) {
-			if(j==0) {
-				sum=sum+arr[i];
-			}
-		}
-		arr1[j] = sum;
-	}
-	return arr1;
-}
-void main() {
-	int arr[][3] = {{1,2,3},{4,5,6},{7,8,9}};
-	int size = sizeof(arr)/sizeof(arr[0]);
-	int *x = col_wise_Addition(arr,3,3);
-	printf("Column wise Addition is: \n");
-	for(int i=0;i<size;i++) {
-		printf("%d",x[i]);
-	}
-}*/
 #include <stdio.h>
 
 #define ROWS 3

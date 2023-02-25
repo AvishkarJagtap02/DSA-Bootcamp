@@ -1,4 +1,4 @@
-// printing numbers which are greater than itself in the array
+// printing count of numbers which are greater than itself in the array
 #include<stdio.h>
 void main() {
 	int size = 8;
