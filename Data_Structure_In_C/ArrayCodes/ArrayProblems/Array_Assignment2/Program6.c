@@ -8,9 +8,9 @@ int main() {
    for (i = 0; i < n; i++) {
       for (j = 0; j < n; j++) {
          scanf("%d", &matrix[i][j]);
-         if (j > i) {
-            matrix[i][j] = 0; // set elements above the diagonal to zero
-         }
+       //  if (j > i) {
+         //	  matrix[i][j] = 0; // set elements above the diagonal to zero
+        // }
       }
    }
    printf("The matrix is:\n");
@@ -18,7 +18,7 @@ int main() {
       for (j = 0; j < n; j++) {
          if (j > i) {
             printf("0 ");
-         } else {
+	 }else {
             printf("%d ", matrix[i][j]);
          }
       }

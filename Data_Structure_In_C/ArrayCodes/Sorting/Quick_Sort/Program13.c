@@ -1,4 +1,4 @@
-//Quick Sort lemuto approach
+//Quick Sort lomuto approach
 //{3, -2, -3, 7, 4, 5}
 #include<stdio.h>
 void swap(int *a,int *b) {

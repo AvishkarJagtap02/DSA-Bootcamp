@@ -1,11 +1,11 @@
-//diagonal wise sum
+//anti diagonal wise sum
 #include <stdio.h>
 #include<stdlib.h>
 int Anti_diagonal(int rows,int cols,int arr[rows][cols]) {
 	int sum = 0;
 	for(int i = 0;i < rows; i++) {
 		for(int j=0;j<cols;j++) {
-			if(i==j) {
+			if(i+j==2) {
 				sum = sum + arr[i][j];
 			}
 		}

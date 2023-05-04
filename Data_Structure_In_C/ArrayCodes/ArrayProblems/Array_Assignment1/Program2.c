@@ -1,9 +1,12 @@
-//program to check goodPair
+//program to check if goodPair is available or not
 #include<stdio.h>
 int goodPair(int arr[], int size,int key) {
 	for(int i=0;i<size;i++) {
-		if((arr[i]+arr[i+1])==key) {
-			return 1;
+		for(int j=i+1;j<size;j++) {
+
+			if((arr[i]+arr[j])==key) {
+				return 1;
+			}
 		}
 	}return 0;
 }
