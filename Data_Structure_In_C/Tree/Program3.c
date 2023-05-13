@@ -55,7 +55,6 @@ void iterativeInorder(struct Treenode* root) {
 	if(root == NULL) {
 		return;
 	}
-	struct StackFrame* stack = (struct StackFrame*)malloc(sizeof(struct StackFrame));
 	struct Treenode* temp = root;
 
 	while(!isEmpty() || temp!=NULL) {
@@ -64,12 +63,11 @@ void iterativeInorder(struct Treenode* root) {
 			push(temp);
 			temp = temp->left;
 		}else {
-			temp =  pop(stack);
+			temp =  pop();
 			printf("%d ",temp->data);
 			temp = temp->right;
 		}
 	}
-	free(stack);
 }
 void main() {
 
